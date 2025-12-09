@@ -1,0 +1,81 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+/node_modules
+/tmp
+/.pnp
+.pnp.js
+.yarn/install-state.gz
+
+# testing
+/coverage
+
+# next.js
+/.next/
+/out/
+
+# production
+/build
+
+# misc
+.DS_Store
+*.pem
+
+# debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# local env files
+.env*
+
+# vercel
+.vercel
+
+# typescript
+*.tsbuildinfo
+next-env.d.ts
+
+# contentlayer
+.contentlayer
+
+# Sentry Config File
+.env.sentry-build-plugin
+
+*.zip
+
+*/.venv
+*/__pycache__
+*/.pytest_cache
+*/.mypy_cache
+
+# Log files
+*/logs/
+logs/
+
+/venv/
+/.venv/
+/.idea
+**/__pycache__/
+**/.pytest_cache/
+/.ipynb_checkpoints/
+/.mypy_cache
+**/output/
+**/.DS_Store
+*.pyc
+.env
+.env.*
+!.env.production
+dist
+
+# Virtual environments
+.python-version
+
+# IDE
+.vscode/
+*.swp
+*.swo
+*~
+
+# Logs
+*.log
