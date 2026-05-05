@@ -1,14 +1,16 @@
 # Sync SaaS Tools to GitHub for AI Context
 
 Turn Gmail, Google Drive, Google Calendar, Slack, Chatwork, Google Chat,
-Notion, and Zoom into a Git-backed AI knowledge base. Each template syncs data
-with GitHub Actions, commits readable files, and lets Cursor, Claude Code,
-Codex, or another coding agent use those files as local context.
+Notion, Zoom, Microsoft Teams, and Limitless into a Git-backed AI knowledge
+base. Each template syncs data with GitHub Actions, commits readable files, and
+lets Cursor, Claude Code, Codex, or another coding agent use those files as
+local context.
 
 Use this project when you want to sync Slack to GitHub, back up Gmail to
 GitHub, convert Google Drive to Markdown, export Google Calendar to Markdown,
-save Zoom transcripts, or keep Notion and chat tools available as LLM context
-without wiring every AI workflow directly to SaaS APIs.
+save Zoom transcripts, sync Limitless lifelogs, or keep Notion, Teams, and chat
+tools available as LLM context without wiring every AI workflow directly to SaaS
+APIs.
 
 ## Supported Tools
 
@@ -22,9 +24,8 @@ without wiring every AI workflow directly to SaaS APIs.
 | Google Chat | [`gchat`](gchat) | Message data files | Requires Google Chat API access and configured spaces. |
 | Notion | [`notion`](notion) | JSON and simple Markdown | Saves page/database metadata and properties. |
 | Zoom | [`zoom`](zoom) | Recording metadata, Markdown summaries, transcripts | Audio/video download is disabled by default. |
-
-Teams and Limitless are not listed as supported until their templates exist in
-this repository.
+| Microsoft Teams | [`teams`](teams) | Daily JSONL channel logs | Uses Microsoft Graph app-only auth; chats and meeting recordings are not enabled by default. |
+| Limitless | [`limitless`](limitless) | Lifelog JSON, Markdown, and contents JSONL | Supports Pendant lifelogs; audio download is disabled by default. |
 
 ## Why GitHub for AI Context
 
@@ -72,6 +73,8 @@ git submodule add https://github.com/<user>/chatwork data/chatwork
 git submodule add https://github.com/<user>/gchat data/gchat
 git submodule add https://github.com/<user>/notion data/notion
 git submodule add https://github.com/<user>/zoom data/zoom
+git submodule add https://github.com/<user>/teams data/teams
+git submodule add https://github.com/<user>/limitless data/limitless
 ```
 
 Fetch the latest synced data from your main repository:
@@ -115,6 +118,8 @@ paths for that template:
 - [Google Chat setup](gchat/README.md)
 - [Notion setup](notion/README.md)
 - [Zoom setup](zoom/README.md)
+- [Microsoft Teams setup](teams/README.md)
+- [Limitless setup](limitless/README.md)
 
 Common behavior:
 
@@ -125,9 +130,10 @@ Common behavior:
 
 ## Privacy and Repository Size
 
-Synced email, documents, chat logs, calendars, recordings, and transcripts can
-contain sensitive data. Use private repositories, restrict token scopes, and be
-careful before enabling large file downloads such as Zoom audio or video.
+Synced email, documents, chat logs, calendars, recordings, lifelogs, and
+transcripts can contain sensitive data. Use private repositories, restrict token
+scopes, and be careful before enabling broad chat scopes or large file downloads
+such as Zoom, Teams, or Limitless audio/video.
 
 Git is excellent for text history, but it is not ideal for large binary
 archives. Prefer Markdown, JSON, JSONL, `.eml`, and transcript files for an AI
