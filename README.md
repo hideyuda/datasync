@@ -1,6 +1,6 @@
-# Auto-Sync Slack, Gmail, Drive, and Calendar to GitHub for Better AI Context
+# Auto-Sync Slack, Chatwork, Gmail, Drive, and Calendar to GitHub for Better AI Context
 
-Dump data from Gmail, Drive, Calendar, and Slack into a Git repository first → Use that repo as a "Local Knowledge Base" for Cursor or your AI Agent.
+Dump data from Gmail, Drive, Calendar, Slack, and Chatwork into a Git repository first → Use that repo as a "Local Knowledge Base" for Cursor or your AI Agent.
 
 This directory contains standalone, repo-ready templates for scheduled sync:
 
@@ -8,6 +8,7 @@ This directory contains standalone, repo-ready templates for scheduled sync:
   * **Google Drive:** Converts Docs, Slides, and Sheets into Markdown.
   * **Google Calendar:** Exports schedules (past 3 months to future 3 months) as daily Markdown summaries.
   * **Slack:** Dumps logs from joined channels into daily JSONL files.
+  * **Chatwork:** Dumps room messages into daily JSONL files via the Chatwork API.
 
 Run these as **separate GitHub repositories** and use **GitHub Actions** to periodically check for diffs and auto-commit them. 
 
@@ -133,6 +134,12 @@ Configure the Secrets/Env vars in each of your sync repos (`gmail-sync`, `gdrive
   * **Install to Workspace** and copy the **Bot User OAuth Token** (`xoxb-...`).
   * Set this as `SLACK_BOT_TOKEN` in your repo secrets.
 
+**3-5. Chatwork (`chatwork-sync`)**
+
+  * Create or copy your Chatwork API token.
+  * Set it as `CHATWORK_API_TOKEN` in your repo secrets.
+  * *Optional:* Set `CHATWORK_ROOM_IDS` as a repository variable with comma-separated room IDs to sync only specific rooms.
+
 #### 4\. The First Run
 
 Go to the **Actions** tab in each repo and manually trigger the workflow.
@@ -148,6 +155,7 @@ git submodule add https://github.com/<user>/gmail-sync  data/gmail-sync
 git submodule add https://github.com/<user>/gdrive-sync data/gdrive-sync
 git submodule add https://github.com/<user>/gcal-sync   data/gcal-sync
 git submodule add https://github.com/<user>/slack-sync  data/slack-sync
+git submodule add https://github.com/<user>/chatwork-sync data/chatwork-sync
 ```
 
 To fetch new data, just run:
