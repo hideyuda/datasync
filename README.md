@@ -1,6 +1,6 @@
-# Auto-Sync Slack, Chatwork, Gmail, Drive, and Calendar to GitHub for Better AI Context
+# Auto-Sync Slack, Chatwork, Gmail, Drive, Calendar, and Zoom to GitHub for Better AI Context
 
-Dump data from Gmail, Drive, Calendar, Slack, and Chatwork into a Git repository first → Use that repo as a "Local Knowledge Base" for Cursor or your AI Agent.
+Dump data from Gmail, Drive, Calendar, Slack, Chatwork, and Zoom into a Git repository first → Use that repo as a "Local Knowledge Base" for Cursor or your AI Agent.
 
 This directory contains standalone, repo-ready templates for scheduled sync:
 
@@ -9,6 +9,7 @@ This directory contains standalone, repo-ready templates for scheduled sync:
   * **Google Calendar:** Exports schedules (past 3 months to future 3 months) as daily Markdown summaries.
   * **Slack:** Dumps logs from joined channels into daily JSONL files.
   * **Chatwork:** Dumps room messages into daily JSONL files via the Chatwork API.
+  * **Zoom:** Saves Cloud Recording metadata and transcripts for AI-readable meeting context.
 
 Run these as **separate GitHub repositories** and use **GitHub Actions** to periodically check for diffs and auto-commit them. 
 
@@ -140,6 +141,18 @@ Configure the Secrets/Env vars in each of your sync repos (`gmail-sync`, `gdrive
   * Set it as `CHATWORK_API_TOKEN` in your repo secrets.
   * *Optional:* Set `CHATWORK_ROOM_IDS` as a repository variable with comma-separated room IDs to sync only specific rooms.
 
+**3-6. Zoom (`zoom-sync`)**
+
+  * Create a Server-to-Server OAuth app in the [Zoom App Marketplace](https://marketplace.zoom.us/).
+  * Add cloud recording read scopes. If you do not set `ZOOM_USER_IDS`, also add user read/list scopes so the script can discover active account users.
+  * Set these repository secrets:
+      * `ZOOM_ACCOUNT_ID`
+      * `ZOOM_CLIENT_ID`
+      * `ZOOM_CLIENT_SECRET`
+  * *Optional:* Set `ZOOM_USER_IDS` as a repository variable with comma-separated user IDs or emails.
+  * *Optional:* Set `ZOOM_FROM_DAYS` to control the lookback window. Defaults to `30`.
+  * *Optional:* Set `ZOOM_DOWNLOAD_RECORDINGS=true` only if you want to store audio/video files in Git. Transcripts are downloaded by default.
+
 #### 4\. The First Run
 
 Go to the **Actions** tab in each repo and manually trigger the workflow.
@@ -156,6 +169,7 @@ git submodule add https://github.com/<user>/gdrive-sync data/gdrive-sync
 git submodule add https://github.com/<user>/gcal-sync   data/gcal-sync
 git submodule add https://github.com/<user>/slack-sync  data/slack-sync
 git submodule add https://github.com/<user>/chatwork-sync data/chatwork-sync
+git submodule add https://github.com/<user>/zoom-sync data/zoom-sync
 ```
 
 To fetch new data, just run:
