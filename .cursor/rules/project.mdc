@@ -1,0 +1,14 @@
+---
+description: Project conventions for SaaS data sync templates
+alwaysApply: true
+---
+
+# Project Rules
+
+- This repository is a collection of standalone Python 3.11 sync templates.
+- Service directories use `[service]` names such as `gmail`, `slack`, and `zoom`.
+- Keep each service copyable into its own GitHub repository with `src/`, `requirements.txt`, `.github/workflows/sync.yml`, and `README.md`.
+- Do not commit secrets, tokens, generated `data/` contents, or local `.env` files.
+- Sync scripts should skip gracefully when required secrets are missing.
+- Prefer API-free unit tests for parsing, rendering, path, state, and selection logic before adding mocked API tests.
+- Avoid broad refactors that make one service depend on another unless the repository is intentionally converted into a shared package.

@@ -20,7 +20,7 @@ Optional Variables (Actions → Variables):
 Submodule usage:
 1) Create this repo on GitHub and push.
 2) In your main repo:  
-   `git submodule add https://github.com/you/gmail-sync vendors/gmail`
+   `git submodule add https://github.com/you/gmail vendors/gmail`
 3) Commit and pull updates as needed:  
    `git submodule update --remote vendors/gmail`
 
